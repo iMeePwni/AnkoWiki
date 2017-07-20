@@ -61,15 +61,35 @@ class MainFragment : Fragment(),
             add(Anko("Make a call") {
                 alert {
                     customView {
-                        tintedEditText {
+                        val phone = tintedEditText {
                             inputType = InputType.TYPE_CLASS_PHONE
-                            yesButton {
-
-                                makeCall(this.text.toString())
-                            }
+                        }
+                        yesButton {
+                            makeCall(phone.text.toString())
                         }
                     }
                 }.show()
+            })
+            add(Anko("sendSMS") {
+                alert {
+                    customView {
+                        val text = tintedEditText {
+                            inputType = InputType.TYPE_CLASS_TEXT
+                        }
+                        yesButton {
+                            activity.sendSMS("18566235740", text.text.toString())
+                        }
+                    }
+                }.show()
+            })
+            add(Anko("Browse The web"){
+                browse("https://www.baidu.com")
+            })
+            add(Anko("share some text"){
+                share("text", "subject")
+            })
+            add(Anko("SendAnEmail"){
+                email("email", "subject", "haha")
             })
         }
     }
