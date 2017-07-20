@@ -1,5 +1,6 @@
 package com.imeepwni.android.ankowiki.ui
 
+import android.content.*
 import android.databinding.*
 import android.os.*
 import android.support.v4.app.*
@@ -37,6 +38,23 @@ class MainFragment : Fragment(), AnkoLogger {
                     }
                 }.show()
             })
+            add(Anko("selectors") {
+                val list = arrayListOf("Russia", "USA", "Japan", "Australia")
+                selector("Where are you from?", list) {
+                    _, i ->
+                    toast("So you're living in ${list[i]}")
+                }
+            })
+            add(Anko("Progress dialogs") {
+                progressDialog("Please wait a bit...", "Fetching data") {
+                    setButton( DialogInterface.BUTTON_POSITIVE, "ok") {
+                        _,_ -> toast(" ok")
+                    }
+                    setButton(DialogInterface.BUTTON_NEGATIVE, "cancel") {
+                        _,_ -> cancel()
+                    }
+                }
+            })
         }
     }
 
@@ -44,7 +62,7 @@ class MainFragment : Fragment(), AnkoLogger {
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentMainBinding>(inflater, R.layout.fragment_main, container, false)
         with(binding.recyclerView) {
-            layoutManager = GridLayoutManager(activity, 3)
+            layoutManager = StaggeredGridLayoutManager(3, RecyclerView.VERTICAL)
             adapter = AnkoAdapter()
         }
         return binding.root
@@ -65,9 +83,7 @@ class MainFragment : Fragment(), AnkoLogger {
         override fun getItemCount() = ankoList.size
     }
 
-    inner class ViewHolder(binding: LayoutListItemBinding) : RecyclerView.ViewHolder(binding.button) {
-        val binding = binding
-
+    inner class ViewHolder(val binding: LayoutListItemBinding) : RecyclerView.ViewHolder(binding.button) {
         fun bind(anko: Anko) {
             (binding.button).run {
                 text = anko.name
