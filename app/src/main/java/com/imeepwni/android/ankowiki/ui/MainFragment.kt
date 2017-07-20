@@ -5,6 +5,7 @@ import android.databinding.*
 import android.os.*
 import android.support.v4.app.*
 import android.support.v7.widget.*
+import android.text.*
 import android.view.*
 import com.imeepwni.android.ankowiki.*
 import com.imeepwni.android.ankowiki.databinding.*
@@ -13,13 +14,13 @@ import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.*
 import org.jetbrains.anko.support.v4.*
 
-class MainFragment : Fragment(), AnkoLogger {
+class MainFragment : Fragment(),
+        AnkoLogger {
 
     val ankoList by lazy {
         arrayListOf<Anko>().apply {
             add(Anko("toast") {
                 toast("Hi there!")
-                debug { "this is function end" }
             })
             add(Anko("longToast") {
                 longToast("Wow, such a duration")
@@ -47,13 +48,28 @@ class MainFragment : Fragment(), AnkoLogger {
             })
             add(Anko("Progress dialogs") {
                 progressDialog("Please wait a bit...", "Fetching data") {
-                    setButton( DialogInterface.BUTTON_POSITIVE, "ok") {
-                        _,_ -> toast(" ok")
+                    setButton(DialogInterface.BUTTON_POSITIVE, "ok") {
+                        _, _ ->
+                        toast(" ok")
                     }
                     setButton(DialogInterface.BUTTON_NEGATIVE, "cancel") {
-                        _,_ -> cancel()
+                        _, _ ->
+                        cancel()
                     }
                 }
+            })
+            add(Anko("Make a call") {
+                alert {
+                    customView {
+                        tintedEditText {
+                            inputType = InputType.TYPE_CLASS_PHONE
+                            yesButton {
+
+                                makeCall(this.text.toString())
+                            }
+                        }
+                    }
+                }.show()
             })
         }
     }
