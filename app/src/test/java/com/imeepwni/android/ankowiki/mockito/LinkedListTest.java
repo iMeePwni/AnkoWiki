@@ -2,6 +2,8 @@ package com.imeepwni.android.ankowiki.mockito;
 
 import org.junit.*;
 import org.mockito.*;
+import org.mockito.invocation.*;
+import org.mockito.stubbing.*;
 
 import java.util.*;
 
@@ -164,5 +166,35 @@ public class LinkedListTest {
 
         System.out.println(mockedList.get(0));
         System.out.println(mockedList.get(0));
+
+        // shorter version of consecutive stubbing
+        when(mockedList.get(anyInt()))
+                .thenReturn("one", "two", "three");
+        System.out.println(mockedList.get(0));
+        System.out.println(mockedList.get(0));
+        System.out.println(mockedList.get(0));
+
+        // Warning : if instead of chaining .thenReturn() calls,
+        // multiple stubbing with the same matchers or arguments is used,
+        // then each stubbing will override the previous one:
+//        when(mock.someMethod("some arg"))
+//                .thenReturn("one")
+//        when(mock.someMethod("some arg"))
+//                .thenReturn("two") 会覆盖上一个桩
+    }
+
+    //We recommend simply stubbing with thenReturn() or thenThrow(),
+    // which should be enough to test/test-drive any clean & simple code.
+    // However, if you do have a need to stub with the generic Answer interface,
+    // here is an example: 尽量不用回调桩
+    @Test
+    public void stubbingWithCallBacks() throws Exception {
+        when(mockedList.get(anyInt())).thenAnswer(new Answer<String>() {
+            @Override
+            public String answer(InvocationOnMock invocation) throws Throwable {
+                return invocation.getMock().toString();
+            }
+        });
+        System.out.println(mockedList.get(1));
     }
 }
