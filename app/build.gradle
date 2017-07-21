@@ -47,4 +47,5 @@ dependencies {
     compile "org.jetbrains.anko:anko-coroutines:$anko_version"
     compile "org.jetbrains.anko:anko-appcompat-v7-coroutines:$anko_version"
     compile "org.jetbrains.anko:anko-sdk25:$anko_version"
+    compile "org.jetbrains.anko:anko-sqlite:$anko_version"
 }

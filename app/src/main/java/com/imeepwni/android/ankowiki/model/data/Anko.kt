@@ -1,4 +1,4 @@
-package com.imeepwni.android.ankowiki.model
+package com.imeepwni.android.ankowiki.model.data
 
 import android.view.*
 

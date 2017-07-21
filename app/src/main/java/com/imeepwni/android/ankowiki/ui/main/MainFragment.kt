@@ -7,7 +7,8 @@ import android.support.v7.widget.*
 import android.view.*
 import com.imeepwni.android.ankowiki.*
 import com.imeepwni.android.ankowiki.databinding.*
-import com.imeepwni.android.ankowiki.model.*
+import com.imeepwni.android.ankowiki.model.data.*
+import com.imeepwni.android.ankowiki.model.repository.*
 import com.imeepwni.android.ankowiki.vm.*
 import org.jetbrains.anko.*
 
