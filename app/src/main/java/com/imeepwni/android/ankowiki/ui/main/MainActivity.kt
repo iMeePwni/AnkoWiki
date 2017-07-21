@@ -1,4 +1,4 @@
-package com.imeepwni.android.ankowiki.ui
+package com.imeepwni.android.ankowiki.ui.main
 
 import android.support.v4.app.*
 import com.imeepwni.android.ankowiki.app.*

@@ -1,4 +1,4 @@
-package com.imeepwni.android.ankowiki.ui
+package com.imeepwni.android.ankowiki.ui.main
 
 import android.databinding.*
 import android.os.*
