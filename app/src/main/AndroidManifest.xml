@@ -3,6 +3,7 @@
           package="com.imeepwni.android.ankowiki">
 
     <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".app.App"

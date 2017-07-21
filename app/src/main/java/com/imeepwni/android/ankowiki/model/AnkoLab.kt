@@ -2,15 +2,18 @@ package com.imeepwni.android.ankowiki.model
 
 import android.app.*
 import android.content.*
+import android.support.annotation.*
 import android.text.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.appcompat.v7.*
+import org.jetbrains.anko.coroutines.experimental.*
+import java.net.*
+
 
 /**
  * Create by guofeng on 2017/7/20.
  */
 class AnkoLab(val activity: Activity) {
-
     fun getAnkoList() = arrayListOf<Anko>().apply {
         with(activity) {
             add(Anko("toast") {
@@ -84,6 +87,18 @@ class AnkoLab(val activity: Activity) {
             })
             add(Anko("SendAnEmail") {
                 email("email", "subject", "haha")
+            })
+            add(Anko("asReference") {
+                val ref: Ref<Activity> = this.asReference()
+
+                doAsync {
+                    val string = URL("https://www.baidu.com").readText()
+                    uiThread {
+                        ref.run {
+                            toast(string)
+                        }
+                    }
+                }
             })
         }
     }
