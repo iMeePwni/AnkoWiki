@@ -155,4 +155,14 @@ public class LinkedListTest {
         //following verification will fail
 //        verifyNoMoreInteractions(mockedList);
     }
+
+    @Test
+    public void stubbingConsecutiveCalls() throws Exception {
+        when(mockedList.get(anyInt()))
+                .thenReturn("111")
+                .thenReturn("222");
+
+        System.out.println(mockedList.get(0));
+        System.out.println(mockedList.get(0));
+    }
 }
