@@ -197,4 +197,21 @@ public class LinkedListTest {
         });
         System.out.println(mockedList.get(1));
     }
+
+    @Test
+    public void spyingOnRealObjects() throws Exception {
+        List list = new LinkedList();
+        List spy = spy(list);
+
+        when(spy.size()).thenReturn(100);
+
+        spy.add("one");
+        spy.add("two");
+
+        System.out.println(spy.get(0));
+        System.out.println(spy.size());
+
+        verify(spy).add("one");
+        verify(spy).add("two");
+    }
 }
